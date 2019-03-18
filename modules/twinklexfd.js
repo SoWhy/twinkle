@@ -60,28 +60,30 @@ Twinkle.xfd.callback = function twinklexfdCallback() {
 			tooltip: 'When activated, a default choice is made, based on what namespace you are in. This default should be the most appropriate',
 			event: Twinkle.xfd.callback.change_category
 		} );
+	var namespace = mw.config.get('wgNamespaceNumber');
+	
 	categories.append( {
 			type: 'option',
 			label: 'AfD (Articles for deletion)',
-			selected: mw.config.get('wgNamespaceNumber') === 0,  // Main namespace
+			selected: namespace === 0,  // Main namespace
 			value: 'afd'
 		} );
 	categories.append( {
 			type: 'option',
 			label: 'TfD (Templates for discussion)',
-			selected: [ 10, 828 ].indexOf( mw.config.get('wgNamespaceNumber') ) !== -1,  // Template and module namespaces
+			selected: [ 10, 828 ].indexOf(namespace) !== -1,  // Template and module namespaces
 			value: 'tfd'
 		} );
 	categories.append( {
 			type: 'option',
 			label: 'FfD (Files for discussion)',
-			selected: mw.config.get('wgNamespaceNumber') === 6,  // File namespace
+			selected: namespace === 6,  // File namespace
 			value: 'ffd'
 		} );
 	categories.append( {
 			type: 'option',
 			label: 'CfD (Categories for discussion)',
-			selected: mw.config.get('wgNamespaceNumber') === 14,  // Category namespace
+			selected: namespace === 14,  // Category namespace
 			value: 'cfd'
 		} );
 	categories.append( {
@@ -92,7 +94,8 @@ Twinkle.xfd.callback = function twinklexfdCallback() {
 	categories.append( {
 			type: 'option',
 			label: 'MfD (Miscellany for deletion)',
-			selected: [ 0, 6, 10, 14, 828 ].indexOf( mw.config.get('wgNamespaceNumber') ) === -1,
+			selected: [ 0, 6, 10, 14, 828 ].indexOf(namespace) === -1 || Morebits.pageNameNorm.startsWith("Template:User "),
+				//Other namespaces, and userboxes in template namespace
 			value: 'mfd'
 		} );
 	categories.append( {
@@ -473,7 +476,7 @@ Twinkle.xfd.callbacks = {
 	},
 	showPreview: function(form, venue, params) {
 		var templatetext = Twinkle.xfd.callbacks.getDiscussionWikitext(venue, params);
-		form.previewer.beginRender(templatetext, "Wikipedia:Null");
+		form.previewer.beginRender(templatetext, "WP:TW"); // Force wikitext
 	},
 	preview: function(form) {
 		var venue = form.category.value;
@@ -602,7 +605,7 @@ Twinkle.xfd.callbacks = {
 			}
 
 			// Remove some tags that should always be removed on AfD.
-			text = text.replace(/\{\{\s*(dated prod|dated prod blp|Prod blp\/dated|Proposed deletion\/dated|prod2|Proposed deletion endorsed|New unreviewed article|Unreviewed|Userspace draft)\s*(\|(?:\{\{[^{}]*\}\}|[^{}])*)?\}\}\s*/ig, "");
+			text = text.replace(/\{\{\s*(dated prod|dated prod blp|Prod blp\/dated|Proposed deletion\/dated|prod2|Proposed deletion endorsed|Userspace draft)\s*(\|(?:\{\{[^{}]*\}\}|[^{}])*)?\}\}\s*/ig, "");
 			// Then, test if there are speedy deletion-related templates on the article.
 			var textNoSd = text.replace(/\{\{\s*(db(-\w*)?|delete|(?:hang|hold)[- ]?on)\s*(\|(?:\{\{[^{}]*\}\}|[^{}])*)?\}\}\s*/ig, "");
 			if (text !== textNoSd && confirm("A speedy deletion tag was found on this page. Should it be removed?")) {
@@ -712,9 +715,10 @@ Twinkle.xfd.callbacks = {
 		taggingTemplate: function(pageobj) {
 			var text = pageobj.getPageText();
 			var params = pageobj.getCallbackParameters();
+			var tableNewline = (params.tfdtype === 'standard' || params.tfdtype === 'sidebar') ? '\n' : ''; // No newline for inline
 
 			pageobj.setPageText((params.noinclude ? "<noinclude>" : "") + "{{subst:template for discussion|help=off|" +
-				(params.tfdtype !== "standard" ? "type=" + params.tfdtype + "|" : "") + mw.config.get('wgTitle') + (params.noinclude ? "}}</noinclude>" : "}}") + text);
+				(params.tfdtype !== "standard" ? "type=" + params.tfdtype + "|" : "") + mw.config.get('wgTitle') + (params.noinclude ? "}}</noinclude>" : "}}") + tableNewline + text);
 			pageobj.setEditSummary("Nominated for deletion; see [[:" + params.logpage + "#" + Morebits.pageNameNorm + "]]." + Twinkle.getPref('summaryAd'));
 			switch (Twinkle.getPref('xfdWatchPage')) {
 				case 'yes':
@@ -733,10 +737,11 @@ Twinkle.xfd.callbacks = {
 		taggingTemplateForMerge: function(pageobj) {
 			var text = pageobj.getPageText();
 			var params = pageobj.getCallbackParameters();
+			var tableNewline = (params.tfdtype === 'standard' || params.tfdtype === 'sidebar') ? '\n' : ''; // No newline for inline
 
 			pageobj.setPageText((params.noinclude ? "<noinclude>" : "") + "{{subst:tfm|help=off|" +
 				(params.tfdtype !== "standard" ? "type=" + params.tfdtype + "|" : "") + "1=" + params.otherTemplateName.replace(/^Template:/, "") +
-				(params.noinclude ? "}}</noinclude>" : "}}\n") + text);
+				(params.noinclude ? "}}</noinclude>" : "}}") + tableNewline + text);
 			pageobj.setEditSummary("Nominated for merging with [[:" + params.otherTemplateName + "]]; see [[:" +
 				params.logpage + "#" + Morebits.pageNameNorm + "]]." + Twinkle.getPref('summaryAd'));
 			switch (Twinkle.getPref('xfdWatchPage')) {
@@ -1319,6 +1324,8 @@ Twinkle.xfd.callbacks = {
 				return;
 			}
 			apiobj.params.target = target;
+			var section = $(xmlDoc).find('redirects r').first().attr('tofragment');
+			apiobj.params.section = section;
 			Twinkle.xfd.callbacks.rfd.main(apiobj.params);
 		},
 		main: function(params) {
@@ -1372,10 +1379,11 @@ Twinkle.xfd.callbacks = {
 			var old_text = pageobj.getPageText();
 			var params = pageobj.getCallbackParameters();
 			var statelem = pageobj.getStatusElement();
+			var sectionHash = params.section ? '#' + params.section : '';
 
 			var text = old_text.replace( /(<!-- Add new entries directly below this line\.? -->)/, "$1\n{{subst:rfd2|text=" +
 				Morebits.string.formatReasonText(params.reason) + "|redirect="+ Morebits.pageNameNorm + "|target=" +
-				params.target + "}} ~~~~\n" );
+				params.target + sectionHash + "}} ~~~~\n" );
 			if( text === old_text ) {
 				statelem.error( 'failed to find target spot for the discussion' );
 				return;
@@ -1534,19 +1542,24 @@ Twinkle.xfd.callback.evaluate = function(e) {
 		wikipedia_page.setCallbackParameters(params);
 		wikipedia_page.load(Twinkle.xfd.callbacks.tfd.todaysList);
 
-		// Notification to first contributor
+		// Notification to first contributors
 		if (usertalk) {
-			var thispage = new Morebits.wiki.page(mw.config.get('wgPageName'));
-			thispage.setCallbackParameters(params);
-			thispage.lookupCreator(Twinkle.xfd.callbacks.tfd.userNotification);
-
-			// Nice try, but what if the two page creators are the same user?
-			// Also, other XFD types don't do this... yet!
-			//if (xfdcat === "tfm") {
-			//	thispage = new Morebits.wiki.page("Template:" + xfdtarget);
-			//	thispage.setCallbackParameters(params);
-			//	thispage.lookupCreator(Twinkle.xfd.callbacks.tfd.userNotification);
-			//}
+			var involvedpages = [];
+			var seenusers = [];
+			involvedpages.push(new Morebits.wiki.page(mw.config.get('wgPageName')));
+			if (xfdcat === "tfm") {
+				involvedpages.push(new Morebits.wiki.page("Template:" + xfdtarget));
+			}
+			involvedpages.forEach(function(page) {
+				page.setCallbackParameters(params);
+				page.lookupCreator(function(innerpage) {
+					var username = innerpage.getCreator();
+					if (seenusers.indexOf(username) === -1) {
+						seenusers.push(username);
+						Twinkle.xfd.callbacks.tfd.userNotification(innerpage);
+					}
+				});
+			});
 		}
 
 		Morebits.wiki.removeCheckpoint();

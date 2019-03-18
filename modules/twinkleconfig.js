@@ -9,7 +9,7 @@
  *** twinkleconfig.js: Preferences module
  ****************************************
  * Mode of invocation:     Adds configuration form to Wikipedia:Twinkle/Preferences and user
-                           subpages named "/Twinkle preferences", and adds ad box to the top of user
+                           subpages named "/Twinkle preferences", and adds an ad box to the top of user
                            subpages belonging to the currently logged-in user which end in '.js'
  * Active on:              What I just said.  Yeah.
  * Config directives in:   TwinkleConfig
@@ -30,69 +30,69 @@ Twinkle.config.commonEnums = {
 Twinkle.config.commonSets = {
 	csdCriteria: {
 		db: "Custom rationale ({{db}})",
-		g1: "G1", g2: "G2", g3: "G3", g4: "G4", g5: "G5", g6: "G6", g7: "G7", g8: "G8", g10: "G10", g11: "G11", g12: "G12", g13: "G13",
+		g1: "G1", g2: "G2", g3: "G3", g4: "G4", g5: "G5", g6: "G6", g7: "G7", g8: "G8", g10: "G10", g11: "G11", g12: "G12", g13: "G13", g14: "G14",
 		a1: "A1", a2: "A2", a3: "A3", a5: "A5", a7: "A7", a9: "A9", a10: "A10", a11: "A11",
 		u1: "U1", u2: "U2", u3: "U3", u5: "U5",
 		f1: "F1", f2: "F2", f3: "F3", f7: "F7", f8: "F8", f9: "F9", f10: "F10",
 		c1: "C1",
 		t2: "T2", t3: "T3",
-		r2: "R2", r3: "R3",
+		r2: "R2", r3: "R3", r4: "R4",
 		p1: "P1", p2: "P2"
 	},
 	csdCriteriaDisplayOrder: [
 		"db",
-		"g1", "g2", "g3", "g4", "g5", "g6", "g7", "g8", "g10", "g11", "g12", "g13",
+		"g1", "g2", "g3", "g4", "g5", "g6", "g7", "g8", "g10", "g11", "g12", "g13", "g14",
 		"a1", "a2", "a3", "a5", "a7", "a9", "a10", "a11",
 		"u1", "u2", "u3", "u5",
 		"f1", "f2", "f3", "f7", "f8", "f9", "f10",
 		"c1",
 		"t2", "t3",
-		"r2", "r3",
+		"r2", "r3", "r4",
 		"p1", "p2"
 	],
 	csdCriteriaNotification: {
 		db: "Custom rationale ({{db}})",
 		g1: "G1", g2: "G2", g3: "G3", g4: "G4", g6: 'G6 ("unnecessary disambig." and "copy-paste move" only)',
-		g10: "G10", g11: "G11", g12: "G12", g13: "G13",
+		g10: "G10", g11: "G11", g12: "G12", g13: "G13", g14: "G14",
 		a1: "A1", a2: "A2", a3: "A3", a5: "A5", a7: "A7", a9: "A9", a10: "A10", a11: "A11",
 		u3: "U3", u5: "U5",
 		f1: "F1", f2: "F2", f3: "F3", f7: "F7", f8: "F8", f9: "F9", f10: "F10",
 		c1: "C1",
 		t2: "T2", t3: "T3",
-		r2: "R2", r3: "R3",
+		r2: "R2", r3: "R3", r4: "R4",
 		p1: "P1", p2: "P2"
 	},
 	csdCriteriaNotificationDisplayOrder: [
 		"db",
-		"g1", "g2", "g3", "g4", "g6", "g10", "g11", "g12", "g13",
+		"g1", "g2", "g3", "g4", "g6", "g10", "g11", "g12", "g13", "g14",
 		"a1", "a2", "a3", "a5", "a7", "a9", "a10", "a11",
 		"u3", "u5",
 		"f1", "f2", "f3", "f7", "f9", "f10",
 		"c1",
 		"t2", "t3",
-		"r2", "r3",
+		"r2", "r3", "r4",
 		"p1", "p2"
 	],
 	csdAndDICriteria: {
 		db: "Custom rationale ({{db}})",
-		g1: "G1", g2: "G2", g3: "G3", g4: "G4", g5: "G5", g6: "G6", g7: "G7", g8: "G8", g10: "G10", g11: "G11", g12: "G12", g13: "G13",
+		g1: "G1", g2: "G2", g3: "G3", g4: "G4", g5: "G5", g6: "G6", g7: "G7", g8: "G8", g10: "G10", g11: "G11", g12: "G12", g13: "G13", g14: "G14",
 		a1: "A1", a2: "A2", a3: "A3", a5: "A5", a7: "A7", a9: "A9", a10: "A10", a11: "A11",
 		u1: "U1", u2: "U2", u3: "U3", u5: "U5",
 		f1: "F1", f2: "F2", f3: "F3", f4: "F4", f5: "F5", f6: "F6", f7: "F7", f8: "F8", f9: "F9", f10: "F10", f11: "F11",
 		c1: "C1",
 		t2: "T2", t3: "T3",
-		r2: "R2", r3: "R3",
+		r2: "R2", r3: "R3", r4: "R4",
 		p1: "P1", p2: "P2"
 	},
 	csdAndDICriteriaDisplayOrder: [
 		"db",
-		"g1", "g2", "g3", "g4", "g5", "g6", "g7", "g8", "g10", "g11", "g12", "g13",
+		"g1", "g2", "g3", "g4", "g5", "g6", "g7", "g8", "g10", "g11", "g12", "g13", "g14",
 		"a1", "a2", "a3", "a5", "a7", "a9", "a10", "a11",
 		"u1", "u2", "u3", "u5",
 		"f1", "f2", "f3", "f4", "f5", "f6", "f7", "f8", "f9", "f10", "f11",
 		"c1",
 		"t2", "t3",
-		"r2", "r3",
+		"r2", "r3", "r4",
 		"p1", "p2"
 	],
 	namespacesNoSpecial: {
@@ -301,6 +301,15 @@ Twinkle.config.sections = [
 {
 	title: "Revert and rollback",  // twinklefluff module
 	preferences: [
+		// TwinkleConfig.autoMenuAfterRollback (bool)
+		// Option to automatically open the warning menu if the user talk page is opened post-reversion
+		{
+			name: "autoMenuAfterRollback",
+			label: "Automatically open the Twinkle warn menu on a user talk page after Twinkle rollback",
+			helptip: "Only operates if the relevant box is checked below.",
+			type: "boolean"
+		},
+
 		// TwinkleConfig.openTalkPage (array)
 		// What types of actions that should result in opening of talk page
 		{
@@ -550,8 +559,24 @@ Twinkle.config.sections = [
 		},
 		{
 			name: "customTagList",
-			label: "Custom article maintenance tags to display",
+			label: "Custom article/draft maintenance tags to display",
 			helptip: "These appear as additional options at the bottom of the list of tags. For example, you could add new maintenance tags which have not yet been added to Twinkle's defaults.",
+			type: "customList",
+			customListValueTitle: "Template name (no curly brackets)",
+			customListLabelTitle: "Text to show in Tag dialog"
+		},
+		{
+			name: "customFileTagList",
+			label: "Custom file maintenance tags to display",
+			helptip: "Additional tags that you wish to add for files.",
+			type: "customList",
+			customListValueTitle: "Template name (no curly brackets)",
+			customListLabelTitle: "Text to show in Tag dialog"
+		},
+		{
+			name: "customRedirectTagList",
+			label: "Custom redirect category tags to display",
+			helptip: "Additional tags that you wish to add for redirects.",
 			type: "customList",
 			customListValueTitle: "Template name (no curly brackets)",
 			customListLabelTitle: "Text to show in Tag dialog"
@@ -653,12 +678,6 @@ Twinkle.config.sections = [
 			type: "customList",
 			customListValueTitle: "Template name (no curly brackets)",
 			customListLabelTitle: "Text to show in warning list (also used as edit summary)"
-		},
-
-		{
-			name: "markXfdPagesAsPatrolled",
-			label: "Mark page as patrolled when nominating for AFD (if possible)",
-			type: "boolean"
 		}
 	]
 },
@@ -752,13 +771,19 @@ Twinkle.config.sections = [
 		},
 
 		// TwinkleConfig.xfdWatchUser (string)
-		// The watchlist setting of the user if he receives a notification. Either "yes" (add to watchlist), "no" (don't
+		// The watchlist setting of the user talk page if they receive a notification. Either "yes" (add to watchlist), "no" (don't
 		// add to watchlist), or "default" (use setting from preferences). Default is "default" (duh).
 		{
 			name: "xfdWatchUser",
-			label: "Add the user talk page to watchlist (when notifying)",
+			label: "Add user talk page of initial contributor to watchlist (when notifying)",
 			type: "enum",
 			enumValues: Twinkle.config.commonEnums.watchlist
+		},
+
+		{
+			name: "markXfdPagesAsPatrolled",
+			label: "Mark page as patrolled when nominating for AFD (if possible)",
+			type: "boolean"
 		}
 	]
 },
@@ -1180,7 +1205,7 @@ Twinkle.config.init = function twinkleconfigInit() {
 
 		// since all the section headers exist now, we can try going to the requested anchor
 		if (location.hash) {
-			location.hash = location.hash;
+			window.location.hash = location.hash;
 		}
 
 	} else if (mw.config.get("wgNamespaceNumber") === mw.config.get("wgNamespaceIds").user &&
@@ -1515,91 +1540,6 @@ Twinkle.config.save = function twinkleconfigSave(e) {
 	return false;
 };
 
-// The JSON stringify method in the following code was excerpted from
-// http://www.JSON.org/json2.js
-// version of 2011-02-23
-
-// Douglas Crockford, the code's author, has released it into the Public Domain.
-// See http://www.JSON.org/js.html
-
-var JSON;
-if (!JSON) {
-	JSON = {};
-}
-
-(function() {
-	var escapable = /[\\"\x00-\x1f\x7f-\x9f\u00ad\u0600-\u0604\u070f\u17b4\u17b5\u200c-\u200f\u2028-\u202f\u2060-\u206f\ufeff\ufff0-\uffff]/g, // eslint-disable-line no-control-regex
-		gap,
-		indent = '  ',  // hardcoded indent
-		meta = { '\b': '\\b', '\t': '\\t', '\n': '\\n', '\f': '\\f', '\r': '\\r', '"' : '\\"', '\\': '\\\\' };
-
-	function quote(string) {
-		escapable.lastIndex = 0;
-		return escapable.test(string) ? '"' + string.replace(escapable, function (a) {
-			var c = meta[a];
-			return typeof c === 'string' ? c :	'\\u' + ('0000' + a.charCodeAt(0).toString(16)).slice(-4);
-		}) + '"' : '"' + string + '"';
-	}
-
-	function str(key, holder) {
-		var i, k, v, length, mind = gap, partial, value = holder[key];
-
-		if (value && typeof value === 'object' && $.isFunction(value.toJSON)) {
-			value = value.toJSON(key);
-		}
-
-		switch (typeof value) {
-		case 'string':
-			return quote(value);
-		case 'number':
-			return isFinite(value) ? String(value) : 'null';
-		case 'boolean':
-		case 'null':
-			return String(value);
-		case 'object':
-			if (!value) {
-				return 'null';
-			}
-			gap += indent;
-			partial = [];
-			if ($.isArray(value)) {
-				length = value.length;
-				for (i = 0; i < length; ++i) {
-					partial[i] = str(i, value) || 'null';
-				}
-				v = partial.length === 0 ? '[]' : gap ?
-					'[\n' + gap + partial.join(',\n' + gap) + '\n' + mind + ']' :
-					'[' + partial.join(',') + ']';
-				gap = mind;
-				return v;
-			}
-			for (k in value) {
-				if (Object.prototype.hasOwnProperty.call(value, k)) {
-					v = str(k, value);
-					if (v) {
-						partial.push(quote(k) + (gap ? ': ' : ':') + v);
-					}
-				}
-			}
-			v = partial.length === 0 ? '{}' : gap ?
-				'{\n' + gap + partial.join(',\n' + gap) + '\n' + mind + '}' :
-				'{' + partial.join(',') + '}';
-			gap = mind;
-			return v;
-		default:
-			throw new Error( "JSON.stringify: unknown data type" );
-		}
-	}
-
-	if (!$.isFunction(JSON.stringify)) {
-		JSON.stringify = function (value, ignoredParam1, ignoredParam2) {
-			ignoredParam1 = ignoredParam2;  // boredom
-			gap = '';
-			return str('', {'': value});
-		};
-	}
-}());
-
 Twinkle.config.writePrefs = function twinkleconfigWritePrefs(pageobj) {
 	var form = pageobj.getCallbackParameters();
 
@@ -1621,7 +1561,7 @@ Twinkle.config.writePrefs = function twinkleconfigWritePrefs(pageobj) {
 	// and it is not very robust: e.g. compare([2], ["2"]) === true, and
 	// compare({}, {}) === false, but it's good enough for our purposes here
 	var compare = function(a, b) {
-		if ($.isArray(a)) {
+		if (Array.isArray(a)) {
 			if (a.length !== b.length) {
 				return false;
 			}

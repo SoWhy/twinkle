@@ -442,6 +442,7 @@ Twinkle.block.blockPresetsInfo = {
 		forAnonOnly: true,
 		nocreate: true,
 		nonstandard: true,
+		hardblock: true,
 		reason: '{{blocked proxy}}',
 		sig: null
 	},
@@ -669,12 +670,6 @@ Twinkle.block.blockPresetsInfo = {
 		reason: 'Making [[WP:No legal threats|legal threats]]',
 		summary: 'You have been blocked from editing for making [[WP:NLT|legal threats or taking legal action]]'
 	},
-	'uw-memorialblock': {
-		forRegisteredOnly: true,
-		expiry: 'infinity',
-		reason: '{{uw-memorialblock}} <!-- Username indicates tribute to someone, soft block -->',
-		summary: 'You have been indefinitely blocked from editing because your [[WP:U|username]] indicates this account may be used as a memorial or tribute to someone'
-	},
 	'uw-myblock': {
 		autoblock: true,
 		nocreate: true,
@@ -882,7 +877,7 @@ Twinkle.block.blockGroups = [
 			{ label: 'Block evasion – IP', value: 'uw-ipevadeblock' },
 			{ label: 'BLP violations', value: 'uw-bioblock' },
 			{ label: 'Copyright violations', value: 'uw-copyrightblock' },
-			{ label: 'Creating inappropriate pages', value: 'uw-npblock' },
+			{ label: 'Creating nonsense pages', value: 'uw-npblock' },
 			{ label: 'Edit filter-related', value: 'uw-efblock' },
 			{ label: 'Edit warring', value: 'uw-ewblock' },
 			{ label: 'Generic block with talk page access revoked', value: 'uw-blocknotalk' },
@@ -904,7 +899,6 @@ Twinkle.block.blockGroups = [
 		label: 'Username violations',
 		list: [
 			{ label: 'Bot username', value: 'uw-botublock' },
-			{ label: 'Memorial username soft block', value: 'uw-memorialblock' },
 			{ label: 'Promotional username, hard block', value: 'uw-spamublock' },
 			{ label: 'Promotional username, soft block', value: 'uw-softerblock' },
 			{ label: 'Similar username soft block', value: 'uw-ublock-double' },
@@ -1097,7 +1091,7 @@ Twinkle.block.callback.preview = function twinkleblockcallbackPreview(form) {
 
 	var templateText = Twinkle.block.callback.getBlockNoticeWikitext(params);
 
-	form.previewer.beginRender(templateText);
+	form.previewer.beginRender(templateText, 'User_talk:' + mw.config.get('wgRelevantUserName')); // Force wikitext/correct username
 };
 
 Twinkle.block.callback.evaluate = function twinkleblockCallbackEvaluate(e) {
